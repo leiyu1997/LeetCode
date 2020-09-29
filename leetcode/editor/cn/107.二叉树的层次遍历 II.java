@@ -1,25 +1,29 @@
-//给定一个二叉树，找出其最大深度。 
+//给定一个二叉树，返回其节点值自底向上的层次遍历。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历） 
 //
-// 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。 
-//
-// 说明: 叶子节点是指没有子节点的节点。 
-//
-// 示例： 
-//给定二叉树 [3,9,20,null,null,15,7]， 
+// 例如： 
+//给定二叉树 [3,9,20,null,null,15,7], 
 //
 //     3
 //   / \
 //  9  20
 //    /  \
-//   15   7 
+//   15   7
+// 
 //
-// 返回它的最大深度 3 。 
-// Related Topics 树 深度优先搜索
+// 返回其自底向上的层次遍历为： 
+//
+// [
+//  [15,7],
+//  [9,20],
+//  [3]
+//]
+// 
+// Related Topics 树 广度优先搜索
 
-import java.util.ArrayDeque;
-import java.util.Queue;
+
 //leetcode submit region begin(Prohibit modification and deletion)
 
+import java.util.*;
 
 /**
  * Definition for a binary tree node.
@@ -31,20 +35,23 @@ import java.util.Queue;
  * }
  */
 class Solution {
-    public int maxDepth(TreeNode root) {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        LinkedList<List<Integer>> res = new LinkedList<>();
         Queue<TreeNode> queue = new ArrayDeque<>();
         if (root != null) queue.add(root);
-        int depth = 0;
         while (!queue.isEmpty()) {
-            depth++;
+            List<Integer> list = new ArrayList<>();
             int size = queue.size();
             for (int i = 0; i < size; i++) {
                 TreeNode temp = queue.poll();
+                list.add(temp.val);
                 if (temp.left != null) queue.add(temp.left);
                 if (temp.right != null) queue.add(temp.right);
             }
+            res.addFirst(list);
         }
-        return depth;
+        return res;
+
     }
 }
 

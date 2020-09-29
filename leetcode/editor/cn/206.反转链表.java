@@ -9,10 +9,10 @@
 //你可以迭代或递归地反转链表。你能否用两种方法解决这道题？ 
 // Related Topics 链表
 
+import java.util.List;
+
 
 //leetcode submit region begin(Prohibit modification and deletion)
-
-import java.util.List;
 
 /**
  * Definition for singly-linked list.
@@ -24,13 +24,13 @@ import java.util.List;
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-        ListNode pre=null;
-        ListNode cur=head;
-        while (cur.next!=null){
-            ListNode temp=cur.next;
-            cur.next=pre;
-            pre=cur;
-            cur=temp;
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
         }
         return pre;
     }
